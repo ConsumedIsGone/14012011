@@ -2,16 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>For Riddhu ❤️</title>
 
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #ffd6e8, #fff1f7);
       color: #333;
       text-align: center;
       overflow-x: hidden;
@@ -28,6 +26,7 @@
       opacity: 0;
       transform: translateY(20px);
       transition: opacity 0.6s ease, transform 0.6s ease;
+      box-sizing: border-box;
     }
 
     section.active {
@@ -35,9 +34,10 @@
       transform: translateY(0);
     }
 
-    .hidden {
-      display: none;
-    }
+    .hidden { display: none; }
+
+    h1 { font-size: 1.8rem; margin-bottom: 10px; }
+    p { font-size: 1rem; line-height: 1.6; }
 
     button {
       margin-top: 15px;
@@ -49,19 +49,18 @@
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    button:active {
-      background: #ff3b70;
-    }
+    button:active { background: #ff3b70; }
 
-    /* Menu grid */
+    /* Menu grid optimized for portrait */
     .card-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr; /* Stacked for mobile */
       gap: 15px;
       width: 100%;
-      max-width: 360px;
+      max-width: 320px;
       margin-top: 20px;
     }
 
@@ -70,64 +69,46 @@
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
     }
 
     .card img {
       width: 100%;
-      aspect-ratio: 1 / 1;
+      height: 140px;
       object-fit: cover;
     }
 
-    .card p {
-      padding: 10px;
-      margin: 0;
-      font-weight: bold;
-    }
+    .card p { padding: 10px; margin: 0; font-weight: bold; color: #333; }
 
     /* Letter */
     #typedText {
       font-size: 1rem;
       white-space: pre-wrap;
+      text-align: left;
       background: rgba(255, 255, 255, 0.2);
       padding: 20px;
       border-radius: 15px;
-      max-width: 500px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     /* Memories */
-    #memories {
-      background: linear-gradient(135deg, #1a1a1a, #434343);
-    }
-
-    #memories h1 {
-      color: white;
-    }
-
+    .timeline { width: 100%; }
     .memory {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.95);
       border-radius: 15px;
       margin: 15px 0;
       padding: 15px;
-      color: #f0f0f0;
+      color: #333;
       text-align: left;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
+    .memory img { width: 100%; border-radius: 10px; margin-bottom: 10px; }
 
-    .memory img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 10px;
-    }
+    /* Theme-specific overrides */
+    #memories.active { color: white; }
 
     /* Easter eggs */
-    .egg {
-      position: fixed;
-      font-size: 24px;
-      cursor: pointer;
-      opacity: 0.4;
-      z-index: 10;
-    }
-
+    .egg { position: fixed; font-size: 24px; cursor: pointer; opacity: 0.4; z-index: 10; }
     #egg1 { top: 5%; left: 5%; }
     #egg2 { top: 5%; right: 5%; }
     #egg3 { bottom: 5%; right: 5%; }
@@ -141,19 +122,79 @@
       border: 1px solid #ff5c8a;
       width: 80%;
       margin-bottom: 10px;
-    }
-
-    #finish {
-      color: white;
-      background: linear-gradient(135deg, #ff8ab0, #ff5972);
+      font-size: 1rem;
     }
   </style>
 </head>
 
 <body>
-  <!-- CONTENT OMITTED FOR BREVITY (unchanged HTML sections) -->
 
-  <!-- Easter Eggs -->
+  <section id="intro" class="active">
+    <h1>HAPPY BIRTHDAY MONKEYYYYY 💖😜🥳</h1>
+    <p>I made this only for you Riddhu, the most important person in my life :)</p>
+    <button onclick="go('menu')">Start</button>
+  </section>
+
+  <section id="menu" class="hidden">
+    <h1>Choose Anything ✨</h1>
+    <div class="card-grid">
+      <div class="card" onclick="openLetter()">
+        <img src="menu0.jpg">
+        <p>A Letter</p>
+      </div>
+      <div class="card" onclick="go('memories')">
+        <img src="menu1.jpg">
+        <p>Our Memories</p>
+      </div>
+      <div class="card" onclick="go('reasons')">
+        <img src="menu2.jpg">
+        <p>Why You're the Best</p>
+      </div>
+      <div class="card" onclick="go('secret')">
+        <img src="menu3.jpeg">
+        <p>Something Hidden</p>
+      </div>
+    </div>
+    <button onclick="go('finish')">I saw everything</button>
+  </section>
+
+  <section id="letter" class="hidden">
+    <h1>Letter For U 💖</h1>
+    <p id="typedText"></p>
+    <button onclick="go('menu')">Back</button>
+  </section>
+
+  <section id="memories" class="hidden">
+    <h1>Us 💗</h1>
+    <div class="timeline">
+      <div class="memory"><img src="mem1.jpg"><strong>Together on sand dune</strong><br>Just us and a moment that felt unreal.</div>
+      <div class="memory"><img src="mem2.jpg"><strong>Secret Admirer</strong><br>You're not sneaky hun.</div>
+      <div class="memory"><img src="mem3.jpeg"><strong>Us between lanterns</strong><br>Everything glowing, especially you.</div>
+    </div>
+    <button onclick="go('menu')">Back</button>
+  </section>
+
+  <section id="reasons" class="hidden">
+    <h1>You Matter ❤️</h1>
+    <p id="reasonText" style="font-weight:bold; font-size:1.2rem; color:#ff5c8a;">Click below</p>
+    <button onclick="newReason()">Tell me another</button>
+    <button onclick="go('menu')">Back</button>
+  </section>
+
+  <section id="secret" class="hidden">
+    <h1>Only You Know This</h1>
+    <p>Which is the best day of my life?<br>(DDMMYYYY)</p>
+    <input id="answer" type="text" placeholder="type here" inputmode="numeric">
+    <button onclick="check()">Unlock</button>
+    <p id="secretMsg"></p>
+    <button onclick="go('menu')">Back</button>
+  </section>
+
+  <section id="finish" class="hidden">
+    <h1>Happy Birthday ❤️</h1>
+    <p>This will always be yours.</p>
+  </section>
+
   <div class="egg" id="egg1" onclick="alert('I love you endlessly ❤️')">💖</div>
   <div class="egg" id="egg2" onclick="alert('You are my favourite person ✨')">✨</div>
   <div class="egg" id="egg3" onclick="alert('You are my home 🏡')">🌸</div>
@@ -162,24 +203,20 @@
   <div class="egg" id="egg6" onclick="alert('You make my world softer 🌙')">⭐</div>
 
   <script>
-    function hideEggs() {
-      document.querySelectorAll(".egg").forEach(e => e.style.display = "none");
-    }
-
     function go(id) {
       window.scrollTo(0, 0);
 
       const themes = {
         intro: "linear-gradient(135deg, #ffd6e8, #fff1f7)",
         menu: "linear-gradient(135deg, #fff1f7, #ffd6e8)",
-        letter: "linear-gradient(180deg, #ffafbd, #ffc3a0)",
+        letter: "linear-gradient(180deg, #ffafbd, #ffc3a0, #2193b0)",
         memories: "linear-gradient(135deg, #1a1a1a, #434343)",
         reasons: "linear-gradient(135deg, #FFD194, #FAD7A0)",
         secret: "linear-gradient(135deg, #d9f7dc, #e3ffe7)",
         finish: "linear-gradient(135deg, #ff5c8a, #ff3b70)"
       };
 
-      document.body.style.background = themes[id];
+      document.body.style.background = themes[id] || themes.intro;
 
       document.querySelectorAll("section").forEach(sec => {
         sec.classList.add("hidden");
@@ -187,11 +224,13 @@
       });
 
       const target = document.getElementById(id);
-      target.classList.remove("hidden");
-      setTimeout(() => target.classList.add("active"), 50);
+      if (target) {
+        target.classList.remove("hidden");
+        setTimeout(() => target.classList.add("active"), 50);
+      }
     }
 
-const letter = `HAPPY BIRTHDAY MY AMAZINGGGGGG RIDDHUUUU!!!
+    const letter = `HAPPY BIRTHDAY MY AMAZINGGGGGG RIDDHUUUU!!!
 
 Today is a day that the whole universe should be celebrating, because it’s the day my favoritest person was born (any guesses who?). Having you in my life feels like living in a permanent springtime, (that's if spring was the best cause winter is clearly better)—everything is just brighter, softer, and so much more beautiful when I’m with you.
 
@@ -220,7 +259,6 @@ Tanmay`;
       const el = document.getElementById("typedText");
       el.innerText = "";
       index = 0;
-
       clearInterval(typingInterval);
       typingInterval = setInterval(() => {
         if (index < letter.length) {
@@ -273,16 +311,12 @@ Tanmay`;
     ];
 
     function newReason() {
-      document.getElementById("reasonText").innerText =
-        reasons[Math.floor(Math.random() * reasons.length)];
+      document.getElementById("reasonText").innerText = reasons[Math.floor(Math.random() * reasons.length)];
     }
 
     function check() {
       const ans = document.getElementById("answer").value.trim();
-      document.getElementById("secretMsg").innerText =
-        ans === "03102024"
-          ? "That day lives in my heart forever ❤️"
-          : "Try again 😉";
+      document.getElementById("secretMsg").innerText = (ans === "03102024") ? "That day lives in my heart forever ❤️" : "Try again 😉";
     }
   </script>
 </body>
