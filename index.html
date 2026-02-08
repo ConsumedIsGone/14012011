@@ -54,30 +54,37 @@
 
     button:active { background: #ff3b70; }
 
-    /* Menu grid optimized for portrait */
-    .card-grid {
-      display: grid;
-      grid-template-columns: 1fr; /* Stacked for mobile */
-      gap: 15px;
-      width: 100%;
-      max-width: 320px;
-      margin-top: 20px;
-    }
+   /* Menu grid - Set to 2x2 for mobile */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* This creates the 2 columns */
+  gap: 12px;
+  width: 100%;
+  max-width: 340px; /* Adjusted to fit two cards side-by-side comfortably */
+  margin-top: 20px;
+}
 
-    .card {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
 
-    .card img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-    }
+.card img {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* Makes the images square so they fit perfectly in the grid */
+  object-fit: cover;
+}
 
-    .card p { padding: 10px; margin: 0; font-weight: bold; color: #333; }
+.card p {
+  padding: 8px; /* Slightly smaller padding for the 2x2 look */
+  margin: 0;
+  font-size: 0.9rem; /* Keeps the text from wrapping too much */
+  font-weight: bold;
+  color: #333;
+}
 
     /* Letter */
     #typedText {
@@ -321,3 +328,4 @@ Tanmay`;
   </script>
 </body>
 </html>
+
